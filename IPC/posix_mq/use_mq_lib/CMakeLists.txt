@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
+set(CMAKE_VERBOSE_MAKEFILE ON)
+include_directories(${CMAKE_SOURCE_DIR}/../mq_lib)
+set(SOURCE use_mq_lib.cpp)
+link_directories(${CMAKE_SOURCE_DIR}/../mq_lib/build)
+add_executable(use_mq_lib ${SOURCE})
+target_link_libraries(use_mq_lib my_mq rt)
