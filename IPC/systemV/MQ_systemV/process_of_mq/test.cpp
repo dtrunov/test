@@ -18,7 +18,7 @@ int main() {
     return 1;
   }
 
-  std::ofstream ofs ("test.txt", std::ofstream::out);
+  std::ofstream ofs ("message.txt", std::ofstream::out);
 
   const int BUFF_SIZE = 9000;
   char buff[BUFF_SIZE] = {0};
