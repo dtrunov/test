@@ -51,7 +51,7 @@ bool sem::init(const char *file_name) {
     print_error("Failed during semafor creation", errno);
     return false;
   }
-  unsigned short sem_vals[semNum_] = {0};
+  unsigned short* sem_vals = new unsigned short[semNum_];
   for (unsigned short i = 0; i < semNum_; ++i ) {
     sem_vals[i] = i;
   }
@@ -59,8 +59,10 @@ bool sem::init(const char *file_name) {
   arg.array = sem_vals;
   if (-1 == semctl(semId_, 0, SETALL, arg)) {
     print_error("Failed during semctl SETALL", errno);
+    delete[] sem_vals;
     return false;
   }
+  delete[] sem_vals;
   return true;
 }
 
@@ -73,13 +75,15 @@ bool sem::check_sem_val(unsigned short *sem_vals, uint8_t sem_num) {
     std::cout<<"Incorrect parameter sem_num\n";
     return false;
   }
-  unsigned short tmp[semNum_] = {0};
+  unsigned short* tmp = new unsigned short [semNum_];
   semun arg;
   arg.array = tmp;
   if (-1 == semctl(semId_, 0, GETALL, arg)) {
     print_error("Failed during semctl GETALL", errno);
+    delete [] tmp;
     return false;
   }
+  delete [] tmp;
   return (0 == memcmp(sem_vals, tmp, semNum_*sizeof(unsigned short)))? true : false;
 }
 
