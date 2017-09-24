@@ -83,7 +83,9 @@ bool sem::check_sem_val(unsigned short *sem_vals, uint8_t sem_num) {
     delete [] tmp;
     return false;
   }
+
+  bool result = (0 == memcmp(sem_vals, tmp, semNum_*sizeof(unsigned short)))? true : false;;
   delete [] tmp;
-  return (0 == memcmp(sem_vals, tmp, semNum_*sizeof(unsigned short)))? true : false;
+  return result;
 }
 
