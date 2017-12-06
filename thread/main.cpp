@@ -2,7 +2,6 @@
 #include <thread>
 #include <unistd.h>
 #include <fstream>
-#include <memory>
 
 void *thread_main() {
   int i = 0;

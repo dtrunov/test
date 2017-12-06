@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.5)
+project(mutex)
+set(CMAKE_CXX_STANDARD 11)
+include_directories(helpers mutex spinmutex rwmutex)
+set(SOURCE_FILES main.cpp mutex/my_mutex.cpp mutex/my_mutex.h helpers/helper.cpp helpers/helper.h rwmutex/my_rw_mutex.cpp rwmutex/my_rw_mutex.h spinmutex/spinmutex.cpp spinmutex/spinmutex.h)
+add_executable(mutex ${SOURCE_FILES})
+target_link_libraries(mutex -pthread)
